@@ -41,8 +41,6 @@ public class CharacterController {
     
     @PutMapping
     public ResponseEntity<Character> edit(@RequestBody Character character) {
-        
-        System.out.println("ID" + character.getId());
         Character existC = getCharacter(character.getId());
         
         existC.setName(character.getName());
