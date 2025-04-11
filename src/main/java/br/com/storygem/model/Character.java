@@ -20,7 +20,8 @@ public class Character {
     private String powers;
     private String imgUrl;
 
-    public Character (String name, String age, String description, String powers, String imgUrl) {
+    public Character (Long id, String name, String age, String description, String powers, String imgUrl) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.description = description;
