@@ -3,6 +3,8 @@ package br.com.storygem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,11 +30,14 @@ public class CharacterController {
     private CharacterRepository repository;
 
     @GetMapping
+    @Cacheable("characters")
     public List<Character> getAll() {
+        System.out.println("Buscando personagens do banco...");
         return repository.findAll();
     }
 
     @PostMapping
+    @CacheEvict(value="characters", allEntries = true)
     public ResponseEntity<Character> create(@RequestBody Character character) {
 
         repository.save(character);
@@ -40,6 +45,7 @@ public class CharacterController {
     }
     
     @PutMapping
+    @CacheEvict(value="characters", allEntries = true)
     public ResponseEntity<Character> edit(@RequestBody Character character) {
         Character existC = getCharacter(character.getId());
         
@@ -55,6 +61,7 @@ public class CharacterController {
     }
 
     @DeleteMapping
+    @CacheEvict(value="characters", allEntries = true)
     public void delete(@RequestBody Character character) {  
         Character existingCharacter = getCharacter(character.getId());
         if (existingCharacter != null) {
