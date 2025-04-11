@@ -23,6 +23,8 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**", "/home").permitAll()
                 .requestMatchers(HttpMethod.GET, "/creations").permitAll()
                 .requestMatchers(HttpMethod.POST, "/creations").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/creations").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/creations").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();
