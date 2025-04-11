@@ -19,4 +19,12 @@ public class Character {
     private String description;
     private String powers;
     private String imgUrl;
+
+    public Character (String name, String age, String description, String powers, String imgUrl) {
+        this.name = name;
+        this.age = age;
+        this.description = description;
+        this.powers = powers;
+        this.imgUrl = imgUrl;
+    }
 }
