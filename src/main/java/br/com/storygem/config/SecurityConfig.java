@@ -20,7 +20,13 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/home").permitAll()
+                .requestMatchers(
+                    "/auth/**",
+                    "/home",
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html"
+                ).permitAll()
                 .requestMatchers(HttpMethod.GET, "/creations").permitAll()
                 .requestMatchers(HttpMethod.POST, "/creations").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/creations").permitAll()
@@ -29,6 +35,7 @@ public class SecurityConfig {
             );
         return http.build();
     }
+    
 
     @Bean
     public PasswordEncoder passwordEncoder() {

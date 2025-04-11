@@ -3,6 +3,7 @@ package br.com.storygem.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.storygem.model.Character;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.Arrays;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     
     @GetMapping
+    @Operation(tags = "Home", summary = "Pega as informações padrão dos cards da Home" )
     public ResponseEntity<?> getAll() {
 
         Character c1 = new Character(1L,"João Carlos", "??", "Brincalhão e extrovertido", "Ser engraçado", null);

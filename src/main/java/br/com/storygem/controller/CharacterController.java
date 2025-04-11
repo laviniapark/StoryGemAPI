@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.storygem.model.Character;
 import br.com.storygem.repository.CharacterRepository;
+import io.swagger.v3.oas.annotations.Operation;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,7 @@ public class CharacterController {
 
     @GetMapping
     @Cacheable("characters")
+	@Operation(tags = "Character", summary = "Listar Personagens")
     public List<Character> getAll() {
         System.out.println("Buscando personagens do banco...");
         return repository.findAll();
@@ -38,6 +40,7 @@ public class CharacterController {
 
     @PostMapping
     @CacheEvict(value="characters", allEntries = true)
+    @Operation(tags = "Character", summary = "Criar um personagem" )
     public ResponseEntity<Character> create(@RequestBody Character character) {
 
         repository.save(character);
@@ -46,6 +49,7 @@ public class CharacterController {
     
     @PutMapping
     @CacheEvict(value="characters", allEntries = true)
+    @Operation(tags = "Character", summary = "Edita um personagem" )
     public ResponseEntity<Character> edit(@RequestBody Character character) {
         Character existC = getCharacter(character.getId());
         
@@ -62,6 +66,7 @@ public class CharacterController {
 
     @DeleteMapping
     @CacheEvict(value="characters", allEntries = true)
+    @Operation(tags = "Character", summary = "Deleta um personagem" )
     public void delete(@RequestBody Character character) {  
         Character existingCharacter = getCharacter(character.getId());
         if (existingCharacter != null) {
